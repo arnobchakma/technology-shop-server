@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 require('dotenv').config();
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
@@ -26,9 +26,10 @@ client.connect(err => {
       .db('technology')
       .collection('orderProducts');
 
-   app.get('/products', (req, res) => {
+   app.get('/allProducts', (req, res) => {
       productCollection.find({})
       .toArray((err, items) => {
+         console.log(items)
          res.send(items);
       });
    });
